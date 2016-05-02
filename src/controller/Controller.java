@@ -228,7 +228,9 @@ public class Controller {
 			if (studentAct.getHomework().containsKey(selectedItem.toString())){
 				try {
 					score.setText(studentAct.getHomework().get(selectedItem.toString()).toString());
-				} catch (NullPointerException e){}
+				} catch (NullPointerException e){
+					
+				}
 			}
 			btnSave.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				@Override
@@ -258,7 +260,6 @@ public class Controller {
 			gradePane.setVisible(true);
 
 		}
-
 	}
 
 }
