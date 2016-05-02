@@ -15,81 +15,256 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
-   <children>
-      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#fileClose" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Add">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#addStudent" text="Student" />
-              <MenuItem mnemonicParsing="false" onAction="#addTest" text="Test" />
-              <MenuItem mnemonicParsing="false" onAction="#addHomework" text="Homework" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Remove">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#removeStudent" text="Student" />
-              <MenuItem mnemonicParsing="false" onAction="#removeTest" text="Test" />
-              <MenuItem mnemonicParsing="false" onAction="#removeHomework" text="Homework" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <ScrollPane layoutY="25.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0">
-         <content>
-            <Accordion fx:id="accordion" />
-         </content>
-      </ScrollPane>
-      <VBox fx:id="assignmentPane" layoutX="200.0" layoutY="25.0" prefHeight="375.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+<AnchorPane fx:id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+	<children>
+		<MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+			<menus>
+				<Menu mnemonicParsing="false" text="File">
+					<items>
+						<MenuItem mnemonicParsing="false" onAction="#fileClose" text="Close" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Add">
+					<items>
+						<MenuItem mnemonicParsing="false" onAction="#addStudent" text="Student" />
+						<MenuItem mnemonicParsing="false" onAction="#addTest" text="Test" />
+						<MenuItem mnemonicParsing="false" onAction="#addHomework" text="Homework" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Remove">
+					<items>
+						<MenuItem mnemonicParsing="false" onAction="#removeStudent" text="Student" />
+						<MenuItem mnemonicParsing="false" onAction="#removeTest" text="Test" />
+						<MenuItem mnemonicParsing="false" onAction="#removeHomework" text="Homework" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Edit">
+					<items>
+						<MenuItem mnemonicParsing="false" text="Delete" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+		<ScrollPane layoutY="25.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0">
+			<content>
+				<Accordion fx:id="accordion" />
+			</content>
+		</ScrollPane>
+		<VBox fx:id="assignmentPane" layoutX="200.0" layoutY="25.0" prefHeight="375.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+			<children>
+				<Label fx:id="assignment" text="Label">
+					<font>
+						<Font size="18.0" />
+					</font>
+					<VBox.margin>
+						<Insets bottom="10.0" left="10.0" top="10.0" />
+					</VBox.margin>
+				</Label>
+				<Separator prefWidth="200.0" />
+				<HBox prefHeight="100.0" prefWidth="200.0">
+					<children>
+						<Label text="Score:">
+							<HBox.margin>
+								<Insets left="10.0" right="10.0" top="10.0" />
+							</HBox.margin>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</Label>
+						<TextField fx:id="score">
+							<HBox.margin>
+								<Insets right="10.0" top="10.0" />
+							</HBox.margin>
+						</TextField>
+						<Label text="Possible Points:">
+							<HBox.margin>
+								<Insets right="10.0" top="10.0" />
+							</HBox.margin>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</Label>
+						<Label fx:id="possiblePoints" text="Label">
+							<HBox.margin>
+								<Insets top="10.0" />
+							</HBox.margin>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</Label>
+					</children>
+				</HBox>
+				<Button fx:id="btnSave" mnemonicParsing="false" text="Save">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin></Button>
+			</children>
+		</VBox>
+      <VBox fx:id="gradePane" layoutX="210.0" layoutY="35.0" prefHeight="375.0" prefWidth="400.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <children>
-            <Label fx:id="assignment" text="Label">
+            <Label fx:id="studentGradeLabel" text="TestLabel">
                <font>
                   <Font size="18.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />
-               </VBox.margin></Label>
-            <Separator prefWidth="200.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+               </VBox.margin>
+            </Label>
+            <Separator />
+            <HBox prefWidth="400.0">
                <children>
-                  <Label text="Score:">
+                  <Label text="Test Total Possible:">
                      <HBox.margin>
-                        <Insets left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
                      </HBox.margin>
                      <font>
                         <Font size="14.0" />
-                     </font></Label>
-                  <TextField fx:id="score">
+                     </font>
+                  </Label>
+                  <Label fx:id="testTotalPossible" text="Label">
                      <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                     </HBox.margin></TextField>
-                  <Label text="Possible Points:">
-                     <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </HBox.margin>
                      <font>
                         <Font size="14.0" />
-                     </font></Label>
-                  <Label fx:id="possiblePoints" text="Label">
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" />
+                  <Label text="Test Total Achieved:">
                      <HBox.margin>
-                        <Insets top="10.0" />
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
                      </HBox.margin>
                      <font>
                         <Font size="14.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
+                  <Label fx:id="testTotalAchieved" text="Label">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
-            <Button fx:id="btnSave" mnemonicParsing="false" text="Save" />
-         </children></VBox>
-   </children>
+            <HBox layoutX="10.0" layoutY="60.0" prefWidth="400.0" />
+            <Separator />
+            <HBox layoutX="10.0" layoutY="60.0" prefWidth="400.0">
+               <children>
+                  <Label text="Homework Total Possible:">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="homeworkTotalPossible" text="Label">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" />
+                  <Label text="Homework Total Achieved:">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="homeworkTotalAchieved" text="Label">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator layoutX="10.0" layoutY="183.0" />
+            <HBox layoutX="10.0" layoutY="146.0" prefWidth="400.0">
+               <children>
+                  <Label text="Total Points Possible:">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalPointsPossible" text="Label">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" />
+                  <Label text="Total Points Achieved:">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="totalPointsAchieved" text="Label">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator />
+            <HBox layoutX="10.0" layoutY="103.0" prefWidth="400.0">
+               <children>
+                  <Label text="Grade:">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="gradeABC" text="Label">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Separator orientation="VERTICAL" />
+                  <Label text="Grade:">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="gradeScore" text="Label">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator />
+         </children>
+      </VBox>
+	</children>
 </AnchorPane>

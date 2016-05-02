@@ -30,9 +30,9 @@ public class Controller {
 	@FXML
 	Accordion accordion;
 	@FXML
-	VBox assignmentPane;
+	VBox assignmentPane,gradePane;
 	@FXML
-	Label assignment, possiblePoints;
+	Label assignment, possiblePoints, studentGradeLabel, testTotalPossible, testTotalAchieved, homeworkTotalPossible, homeworkTotalAchieved, totalPointsPossible, totalPointsAchieved,gradeABC, gradeScore;
 	@FXML
 	Button btnSave;
 	@FXML
@@ -45,6 +45,7 @@ public class Controller {
     @FXML
     private void initialize() {
     	assignmentPane.setVisible(false);
+    	gradePane.setVisible(false);
     }
     
 	@FXML
@@ -164,7 +165,7 @@ public class Controller {
 
 	private void updateAccordian(){
 		accordion.getPanes().clear();
-		Double listViewHeight = (double) ((application.Data.testMap.size()+application.Data.homeworkMap.size())*25);
+		Double listViewHeight = (double) ((application.Data.testMap.size()+application.Data.homeworkMap.size()+1)*25);
 
 		//get students
 		for (Map.Entry<String, Student> students : Data.studentMap.entrySet()) {	   
@@ -184,6 +185,8 @@ public class Controller {
 			for (Entry<String, Double> homeworks : Data.homeworkMap.entrySet()) {
 				lv.getItems().add(homeworks.getKey().toString());
 			}
+			//add student grade
+			lv.getItems().add("Student Grade");
 			
 			TitledPane tp = new TitledPane();
 			tp.setText(students.getValue().getFirstName()+" "+students.getValue().getLastName());
@@ -191,18 +194,21 @@ public class Controller {
 			accordion.getPanes().add(tp);
 		}	
 		assignmentPane.setVisible(false);
+		gradePane.setVisible(false);
 	}
 	
 	private void updateGradePane(ListView<String> lv, String student) {
 		String selectedItem = lv.getSelectionModel().getSelectedItem();
 		Student studentAct = Data.studentMap.get(student.replaceAll("\\s+", ""));
 		
-		assignmentPane.setVisible(true);
 		assignment.setText(selectedItem+" - "+student);
+		studentGradeLabel.setText(selectedItem+" - "+student);
 		score.setText("");
 
 
 		if (selectedItem.matches("Test\\d+")){
+			assignmentPane.setVisible(true);
+			gradePane.setVisible(false);
 			possiblePoints.setText(Data.testMap.get(selectedItem).toString());
 			if (studentAct.getTest().containsKey(selectedItem.toString()) ){
 				try {
@@ -216,6 +222,8 @@ public class Controller {
 		        }
 			});
 		}else if(selectedItem.matches("Homework\\d+")){
+			assignmentPane.setVisible(true);
+			gradePane.setVisible(false);
 			possiblePoints.setText(Data.homeworkMap.get(selectedItem).toString());
 			if (studentAct.getHomework().containsKey(selectedItem.toString())){
 				try {
@@ -228,6 +236,27 @@ public class Controller {
 					studentAct.setHomework(selectedItem.toString(), Double.parseDouble(score.getText()));
 		        }
 			});
+		}else if(selectedItem.matches("Student Grade")){
+			assignmentPane.setVisible(false);
+			Double testPossible = application.Utilities.calcPossibleTest();
+			Double testAchieved = application.Utilities.calcAchievedTest(studentAct);
+			Double homeworkPossible = application.Utilities.calcPossibleHomework();
+			Double homeworkAchieved =application.Utilities.calcAchievedHomework(studentAct);
+			Double pointsPossible = testPossible+homeworkPossible;
+			Double pointsAchieved = testAchieved+homeworkAchieved;
+			Double gradeFinalScore = (pointsAchieved/pointsPossible)*100;
+			String gradeFinalABC = application.Utilities.calcGradeABC(gradeFinalScore);
+			
+			testTotalPossible.setText(testPossible.toString());
+			testTotalAchieved.setText(testAchieved.toString());
+			homeworkTotalPossible.setText(homeworkPossible.toString());
+			homeworkTotalAchieved.setText(homeworkAchieved.toString());
+			totalPointsPossible.setText(pointsPossible.toString());
+			totalPointsAchieved.setText(pointsAchieved.toString());
+			gradeScore.setText(gradeFinalScore.toString()+"%");
+			gradeABC.setText(gradeFinalABC);
+			gradePane.setVisible(true);
+
 		}
 
 	}
