@@ -1,8 +1,9 @@
 package application;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Data {
-	public static HashMap<String, Student> studentMap = new HashMap<String, Student>();
-	public static HashMap<String, Double> testMap = new HashMap<String, Double>();
+	public static TreeMap<String, Student> studentMap = new TreeMap<String, Student>();
+	public static TreeMap<String, Double> testMap = new TreeMap<String, Double>();
+	public static TreeMap<String, Double> homeworkMap = new TreeMap<String, Double>();
 }

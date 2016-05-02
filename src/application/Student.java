@@ -22,14 +22,20 @@ public class Student {
 	public HashMap<String, Double> getHomework() {
 		return homework;
 	}
-	public void setHomework(HashMap<String, Double> homework) {
-		this.homework = homework;
+	public void setHomework(String homework, Double score) {
+		this.homework.put(homework, score);
+	}
+	public void removeHomework(String homework) {
+		this.homework.remove(homework);
 	}
 	public HashMap<String, Double> getTest() {
 		return test;
 	}
-	public void setTest(HashMap<String, Double> test) {
-		this.test = test;
+	public void setTest(String test, Double score) {
+		this.test.put(test, score);
+	}
+	public void removeTest(String test) {
+		this.test.remove(test);
 	}
 	
 }
